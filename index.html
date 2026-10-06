@@ -12,11 +12,12 @@
 <meta property="og:description" content="Ground0 gives your company its own AI assistant: its own name, its own address, connected to the tools your team already uses. A service of A & H GmbH.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ground0.io/">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0a0a0a">
 <link rel="preload" href="fonts/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <script>document.documentElement.classList.add('js')</script>
-<link rel="stylesheet" href="styles.css?v=2df9c37">
+<link rel="stylesheet" href="styles.css?v=10061825">
 </head>
 <body>
 <header class="bar"><div class="wrap top">
@@ -26,21 +27,32 @@
 <div class="wrap">
 <main>
 <div class="hero">
+  <div class="backdrop" aria-hidden="true"></div>
   <div>
     <span class="eyebrow">AI assistants for companies</span>
     <h1>A colleague who knows your business.</h1>
     <p class="lead">Ground0 gives your company its own assistant, with its own name, at its own address. Your team signs in with Google and asks in plain language. The assistant looks things up in the tools you already use and takes care of the routine work.</p>
     <div class="actions"><a class="btn primary" href="mailto:info@ahgmbh.com?subject=Ground0">Get in touch</a><a class="btn" href="#how">How it works</a></div>
   </div>
-  <div class="chat" data-demo role="img" aria-label="Example conversation: the assistant Adam finds three open invoices, drafts a payment reminder and sends it only after confirmation">
-    <div class="chat-head"><span class="avatar">A</span><b>Adam</b><small>Example</small></div>
-    <div class="chat-body">
-      <p class="msg me" data-step data-after="300">Which invoices are still open for Autohaus Becker?</p>
-      <p class="msg bot" data-step data-after="400" data-typing="1300">Three invoices are open, €4,820 in total. The oldest is 21 days overdue. Shall I draft a reminder?</p>
-      <p class="msg me" data-step data-after="1500">Yes, please.</p>
-      <div class="msg bot" data-step data-after="400" data-typing="1100">The draft is ready. Nothing is sent until you confirm.<div class="chips"><span class="chip ok" data-press="1700">Confirm</span><span class="chip">Edit</span></div></div>
-      <p class="status" data-step data-after="350">Reminder sent · noted in the CRM</p>
+  <div class="chat" data-demo data-once role="group" aria-label="Example conversation: Anna asks the assistant Adam which invoices are open. Adam checks Lexoffice and HubSpot, reports three open invoices, drafts a payment reminder in Gmail and sends it only after Anna confirms.">
+    <div class="chat-head"><span class="avatar">A</span><b>Adam</b><span class="pill">✓ Sent · confirmed by Anna</span><small>Example</small></div>
+    <div class="chat-body" data-scroll tabindex="0">
+      <div class="meta me" data-step data-after="200"><span><b>Anna K.</b> · 09:41</span><span class="who">AK</span></div>
+      <p class="msg me" data-step data-after="150">Which invoices are still open for Autohaus Becker?</p>
+      <div class="meta" data-step data-after="600"><span class="who inv">A</span><span><b>Adam</b> · 09:41</span></div>
+      <div class="tool" data-step data-after="250" data-done="1300"><span class="tico">€</span>Checking open invoices in Lexoffice<span class="tstate"><i class="check"></i><em class="run">Running</em><em class="ok">Completed</em></span></div>
+      <div class="tool" data-step data-after="200" data-done="1000"><span class="tico">#</span>Looking up the contact in HubSpot<span class="tstate"><i class="check"></i><em class="run">Running</em><em class="ok">Completed</em></span></div>
+      <p class="msg bot" data-step data-after="350" data-typing="700"><span data-stream>Three invoices are open, €4,820 in total. The oldest is 21 days overdue. Shall I draft a reminder?</span></p>
+      <div class="meta me" data-step data-after="1400"><span><b>Anna K.</b> · 09:42</span><span class="who">AK</span></div>
+      <p class="msg me" data-step data-after="150">Yes, please.</p>
+      <div class="meta" data-step data-after="600"><span class="who inv">A</span><span><b>Adam</b> · 09:42</span></div>
+      <div class="tool" data-step data-after="250" data-done="1500"><span class="tico">@</span>Drafting the reminder in Gmail<span class="tstate"><i class="check"></i><em class="run">Running</em><em class="ok">Completed</em></span></div>
+      <div class="msg bot" data-step data-after="350" data-typing="600"><span data-stream>The draft is ready, addressed to their accounts department. Nothing is sent until you confirm.</span><div class="chips"><span class="chip ok" data-press="1500">Confirm</span><span class="chip">Edit</span></div></div>
+      <div class="tool" data-step data-after="300" data-done="1200"><span class="tico">@</span>Sending from your Gmail<span class="tstate"><i class="check"></i><em class="run">Running</em><em class="ok">Completed</em></span></div>
+      <div class="tool" data-step data-after="200" data-done="1000"><span class="tico">#</span>Adding a note to the deal in HubSpot<span class="tstate"><i class="check"></i><em class="run">Running</em><em class="ok">Completed</em></span></div>
+      <p class="msg bot" data-step data-after="300"><span data-stream>Done. The reminder is sent and the deal is updated.</span></p>
     </div>
+    <div class="chat-foot"><button class="replay" type="button" data-replay>Replay</button></div>
   </div>
 </div>
 
@@ -82,6 +94,7 @@
 </section>
 
 <section id="contact" class="closing band">
+  <div class="backdrop" aria-hidden="true"></div>
   <h2>Would an assistant like this help your team?</h2>
   <p class="sub">Tell us which tools you work with and what takes up your day. We will show you what an assistant could take over.</p>
   <div class="actions"><a class="btn primary" href="mailto:info@ahgmbh.com?subject=Ground0">info@ahgmbh.com</a><a class="btn" href="tel:+4973069293600">+49 7306 9293600</a></div>
@@ -94,6 +107,6 @@
     <nav aria-label="Legal"><a href="legal-notice.html">Legal notice</a><a href="privacy.html">Privacy</a><a href="mailto:info@ahgmbh.com">info@ahgmbh.com</a></nav>
   </div>
 </footer>
-<script src="site.js?v=2df9c37" defer></script>
+<script src="site.js?v=10061825" defer></script>
 </body>
 </html>
