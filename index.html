@@ -15,6 +15,7 @@
 <meta name="color-scheme" content="light dark">
 <link rel="preload" href="fonts/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -31,32 +32,53 @@
     <p class="lead">Ground0 gives your company its own assistant, with its own name, at its own address. Your team signs in with Google and asks in plain language. The assistant looks things up in the tools you already use and takes care of the routine work.</p>
     <div class="actions"><a class="btn primary" href="mailto:info@ahgmbh.com?subject=Ground0">Get in touch</a><a class="btn" href="#how">How it works</a></div>
   </div>
-  <div class="chat" role="img" aria-label="Example conversation with the assistant Adam about open invoices">
+  <div class="chat" data-demo role="img" aria-label="Example conversation: the assistant Adam finds three open invoices, drafts a payment reminder and sends it only after confirmation">
     <div class="chat-head"><span class="avatar">A</span><b>Adam</b><small>Example</small></div>
-    <p class="msg me">Which invoices are still open for Autohaus Becker?</p>
-    <p class="msg bot">Three invoices are open, €4,820 in total. The oldest is 21 days overdue. Shall I draft a reminder?</p>
-    <p class="msg me">Yes, please.</p>
-    <div class="msg bot">The draft is ready. Nothing is sent until you confirm.<div class="chips"><span class="chip ok">Confirm</span><span class="chip">Edit</span></div></div>
+    <div class="chat-body">
+      <p class="msg me" data-step data-after="300">Which invoices are still open for Autohaus Becker?</p>
+      <p class="msg bot" data-step data-after="400" data-typing="1300">Three invoices are open, €4,820 in total. The oldest is 21 days overdue. Shall I draft a reminder?</p>
+      <p class="msg me" data-step data-after="1500">Yes, please.</p>
+      <div class="msg bot" data-step data-after="400" data-typing="1100">The draft is ready. Nothing is sent until you confirm.<div class="chips"><span class="chip ok" data-press="1700">Confirm</span><span class="chip">Edit</span></div></div>
+      <p class="status" data-step data-after="350">Reminder sent · noted in the CRM</p>
+    </div>
   </div>
 </div>
 
 <section id="how">
   <h2>Set up once, then just ask.</h2>
   <p class="sub">No new software for your team to learn. The assistant lives where they already work.</p>
-  <div class="grid"><div class="card"><div class="num">1</div><h3>Your own address</h3><p>Each company gets its own subdomain on ground0.io and an assistant with a name the team chooses. Ours is called Adam.</p></div><div class="card"><div class="num">2</div><h3>Sign in with Google</h3><p>Your team uses the Google accounts they already have. No extra passwords, and only your people get in.</p></div><div class="card"><div class="num">3</div><h3>Ask in your own words</h3><p>In the browser today, on desktop and phone. An iPhone app is in development.</p></div></div>
+  <div class="rows" data-reveal>
+    <div class="row">
+      <div class="row-text"><h3>Your own assistant, at your own address.</h3><p>Each company gets its own subdomain on ground0.io and an assistant with a name the team chooses. Ours is called Adam.</p><p>Your team signs in with the Google accounts they already have. No extra passwords, and only your people get in.</p></div>
+      <div class="stage"><div class="flow" data-demo role="img" aria-label="Example: opening yourcompany.ground0.io, signing in with Google, and being greeted by the assistant Adam">
+        <div class="addr" data-step><span data-typewrite>yourcompany.ground0.io</span></div>
+        <div class="node gap" data-step data-after="500" data-done="1300"><span class="ico">G</span><div><small>Sign in with Google</small><b>anna@yourcompany.com</b></div><i class="check"></i></div>
+        <div class="node plain" data-step data-after="500"><span class="ico inv">A</span><div><small>Adam · your assistant</small><b data-typewrite>Good morning, Anna. Three things need you today.</b></div></div>
+      </div></div>
+    </div>
+    <div class="row">
+      <div class="row-text"><h3>One question, several tools.</h3><p>Ask in your own words. The assistant works out which of your tools hold the answer, goes through them step by step and shows you what it found.</p><p>Anything that leaves the company waits for your confirmation.</p><p class="fine">In the browser today, on desktop and phone. An iPhone app is in development.</p></div>
+      <div class="stage"><div class="flow" data-demo role="img" aria-label="Example: one request runs through Lexoffice, HubSpot and Gmail, and the email draft waits for confirmation">
+        <div class="node plain" data-step><span class="ico inv">&gt;_</span><div><small>Chat › Request</small><b data-typewrite>Send Autohaus Becker a payment reminder</b></div></div>
+        <div class="node gap" data-step data-after="500" data-done="1200"><span class="ico">€</span><div><small>Lexoffice › Open invoices</small><b>3 invoices · €4,820</b></div><i class="check"></i></div>
+        <div class="node" data-step data-after="350" data-done="1100"><span class="ico">#</span><div><small>HubSpot › Contact</small><b>Autohaus Becker, accounts</b></div><i class="check"></i></div>
+        <div class="node" data-step data-after="350" data-done="2600"><span class="ico">@</span><div><small>Gmail › Draft</small><b>Payment reminder, ready to send</b></div><em class="badge">Confirm</em><i class="check"></i></div>
+      </div></div>
+    </div>
+  </div>
 </section>
 
 <section id="what" class="band">
   <h2>What the assistant does for your team.</h2>
   <p class="sub">These are things our own assistant does every day. Yours is connected to the tools your company uses.</p>
-  <ul class="list"><li><b>Finds the conversation</b><span>Looks up what was agreed with a customer across chat and message history.</span></li><li><b>Keeps track of invoices</b><span>Lists and summarises open invoices, and prepares new invoices and order confirmations.</span></li><li><b>Keeps the CRM up to date</b><span>Creates and completes deals, so nothing depends on someone remembering to type it in.</span></li><li><b>Summarises the inbox</b><span>Tells each person what needs their attention in their email.</span></li><li><b>Reads documents</b><span>Takes in PDFs, including scanned ones, and answers questions about them.</span></li><li><b>Speaks your language</b><span>Answers in the language your colleagues write in.</span></li></ul>
+  <ul class="list"><li data-reveal style="--d:0.00s"><b>Finds the conversation</b><span>Looks up what was agreed with a customer across chat and message history.</span></li><li data-reveal style="--d:0.07s"><b>Keeps track of invoices</b><span>Lists and summarises open invoices, and prepares new invoices and order confirmations.</span></li><li data-reveal style="--d:0.14s"><b>Keeps the CRM up to date</b><span>Creates and completes deals, so nothing depends on someone remembering to type it in.</span></li><li data-reveal style="--d:0.21s"><b>Summarises the inbox</b><span>Tells each person what needs their attention in their email.</span></li><li data-reveal style="--d:0.28s"><b>Reads documents</b><span>Takes in PDFs, including scanned ones, and answers questions about them.</span></li><li data-reveal style="--d:0.35s"><b>Speaks your language</b><span>Answers in the language your colleagues write in.</span></li></ul>
   <p class="note">We currently connect to HubSpot, Lexoffice, Gmail and WhatsApp-based customer messaging. Other tools are added per company.</p>
 </section>
 
 <section>
   <h2>Built the careful way.</h2>
   <p class="sub">An assistant that can act on your behalf has to be trustworthy first.</p>
-  <div class="grid"><div class="card"><h3>You stay in control</h3><p>Before anything is created or sent, the assistant shows you what it is about to do and waits for your confirmation.</p></div><div class="card"><h3>Each company separate</h3><p>Every company has its own assistant, its own address and its own database. Nothing is shared between companies.</p></div><div class="card"><h3>Proven in daily use</h3><p>We built Adam for our own team at A&nbsp;&amp;&nbsp;H&nbsp;GmbH and rely on it every working day. Now we are opening it to other companies.</p></div></div>
+  <div class="grid"><div class="card" data-reveal style="--d:0.00s"><h3>You stay in control</h3><p>Before anything is created or sent, the assistant shows you what it is about to do and waits for your confirmation.</p></div><div class="card" data-reveal style="--d:0.07s"><h3>Each company separate</h3><p>Every company has its own assistant, its own address and its own database. Nothing is shared between companies.</p></div><div class="card" data-reveal style="--d:0.14s"><h3>Proven in daily use</h3><p>We built Adam for our own team at A&nbsp;&amp;&nbsp;H&nbsp;GmbH and rely on it every working day. Now we are opening it to other companies.</p></div></div>
 </section>
 
 <section id="contact" class="closing band">
@@ -72,5 +94,6 @@
     <nav aria-label="Legal"><a href="legal-notice.html">Legal notice</a><a href="privacy.html">Privacy</a><a href="mailto:info@ahgmbh.com">info@ahgmbh.com</a></nav>
   </div>
 </footer>
+<script src="site.js" defer></script>
 </body>
 </html>

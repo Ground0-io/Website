@@ -15,6 +15,7 @@
 <meta name="color-scheme" content="light dark">
 <link rel="preload" href="../fonts/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<script>document.documentElement.classList.add('js')</script>
 <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
@@ -31,32 +32,53 @@
     <p class="lead">Mit Ground0 bekommt Ihr Unternehmen einen eigenen Assistenten, mit eigenem Namen und eigener Adresse. Ihr Team meldet sich mit Google an und fragt in ganz normaler Sprache. Der Assistent schlägt in den Programmen nach, die Sie ohnehin nutzen, und erledigt die Routinearbeit.</p>
     <div class="actions"><a class="btn primary" href="mailto:info@ahgmbh.com?subject=Ground0">Kontakt aufnehmen</a><a class="btn" href="#how">So funktioniert es</a></div>
   </div>
-  <div class="chat" role="img" aria-label="Beispielgespräch mit dem Assistenten Adam über offene Rechnungen">
+  <div class="chat" data-demo role="img" aria-label="Beispielgespräch: Der Assistent Adam findet drei offene Rechnungen, bereitet eine Zahlungserinnerung vor und verschickt sie erst nach Bestätigung">
     <div class="chat-head"><span class="avatar">A</span><b>Adam</b><small>Beispiel</small></div>
-    <p class="msg me">Welche Rechnungen sind beim Autohaus Becker noch offen?</p>
-    <p class="msg bot">Drei Rechnungen sind offen, zusammen 4.820&nbsp;€. Die älteste ist seit 21 Tagen überfällig. Soll ich eine Zahlungserinnerung vorbereiten?</p>
-    <p class="msg me">Ja, bitte.</p>
-    <div class="msg bot">Der Entwurf ist fertig. Es wird nichts verschickt, bevor Sie bestätigen.<div class="chips"><span class="chip ok">Bestätigen</span><span class="chip">Bearbeiten</span></div></div>
+    <div class="chat-body">
+      <p class="msg me" data-step data-after="300">Welche Rechnungen sind beim Autohaus Becker noch offen?</p>
+      <p class="msg bot" data-step data-after="400" data-typing="1300">Drei Rechnungen sind offen, zusammen 4.820&nbsp;€. Die älteste ist seit 21 Tagen überfällig. Soll ich eine Zahlungserinnerung vorbereiten?</p>
+      <p class="msg me" data-step data-after="1500">Ja, bitte.</p>
+      <div class="msg bot" data-step data-after="400" data-typing="1100">Der Entwurf ist fertig. Es wird nichts verschickt, bevor Sie bestätigen.<div class="chips"><span class="chip ok" data-press="1700">Bestätigen</span><span class="chip">Bearbeiten</span></div></div>
+      <p class="status" data-step data-after="350">Erinnerung verschickt · im CRM vermerkt</p>
+    </div>
   </div>
 </div>
 
 <section id="how">
   <h2>Einmal einrichten, dann einfach fragen.</h2>
   <p class="sub">Ihr Team muss keine neue Software lernen. Der Assistent ist dort, wo ohnehin gearbeitet wird.</p>
-  <div class="grid"><div class="card"><div class="num">1</div><h3>Ihre eigene Adresse</h3><p>Jedes Unternehmen erhält eine eigene Subdomain auf ground0.io und einen Assistenten, dessen Namen das Team wählt. Unserer heißt Adam.</p></div><div class="card"><div class="num">2</div><h3>Mit Google anmelden</h3><p>Ihr Team nutzt die vorhandenen Google-Konten. Keine zusätzlichen Passwörter, und nur Ihre Leute haben Zugang.</p></div><div class="card"><div class="num">3</div><h3>In eigenen Worten fragen</h3><p>Heute im Browser, am Schreibtisch und auf dem Handy. Eine iPhone-App ist in Entwicklung.</p></div></div>
+  <div class="rows" data-reveal>
+    <div class="row">
+      <div class="row-text"><h3>Ihr eigener Assistent, unter Ihrer eigenen Adresse.</h3><p>Jedes Unternehmen erhält eine eigene Subdomain auf ground0.io und einen Assistenten, dessen Namen das Team wählt. Unserer heißt Adam.</p><p>Ihr Team meldet sich mit den vorhandenen Google-Konten an. Keine zusätzlichen Passwörter, und nur Ihre Leute haben Zugang.</p></div>
+      <div class="stage"><div class="flow" data-demo role="img" aria-label="Beispiel: ihrefirma.ground0.io öffnen, mit Google anmelden und vom Assistenten Adam begrüßt werden">
+        <div class="addr" data-step><span data-typewrite>ihrefirma.ground0.io</span></div>
+        <div class="node gap" data-step data-after="500" data-done="1300"><span class="ico">G</span><div><small>Mit Google anmelden</small><b>anna@ihrefirma.com</b></div><i class="check"></i></div>
+        <div class="node plain" data-step data-after="500"><span class="ico inv">A</span><div><small>Adam · Ihr Assistent</small><b data-typewrite>Guten Morgen, Anna. Drei Dinge brauchen Sie heute.</b></div></div>
+      </div></div>
+    </div>
+    <div class="row">
+      <div class="row-text"><h3>Eine Frage, mehrere Programme.</h3><p>Fragen Sie in eigenen Worten. Der Assistent erkennt, in welchen Ihrer Programme die Antwort steckt, geht sie Schritt für Schritt durch und zeigt Ihnen, was er gefunden hat.</p><p>Alles, was das Unternehmen verlässt, wartet auf Ihre Bestätigung.</p><p class="fine">Heute im Browser, am Schreibtisch und auf dem Handy. Eine iPhone-App ist in Entwicklung.</p></div>
+      <div class="stage"><div class="flow" data-demo role="img" aria-label="Beispiel: Eine Anfrage läuft durch Lexoffice, HubSpot und Gmail, und der E-Mail-Entwurf wartet auf die Bestätigung">
+        <div class="node plain" data-step><span class="ico inv">&gt;_</span><div><small>Chat › Anfrage</small><b data-typewrite>Autohaus Becker eine Zahlungserinnerung schicken</b></div></div>
+        <div class="node gap" data-step data-after="500" data-done="1200"><span class="ico">€</span><div><small>Lexoffice › Offene Rechnungen</small><b>3 Rechnungen · 4.820&nbsp;€</b></div><i class="check"></i></div>
+        <div class="node" data-step data-after="350" data-done="1100"><span class="ico">#</span><div><small>HubSpot › Kontakt</small><b>Autohaus Becker, Buchhaltung</b></div><i class="check"></i></div>
+        <div class="node" data-step data-after="350" data-done="2600"><span class="ico">@</span><div><small>Gmail › Entwurf</small><b>Zahlungserinnerung, bereit zum Versand</b></div><em class="badge">Bestätigen</em><i class="check"></i></div>
+      </div></div>
+    </div>
+  </div>
 </section>
 
 <section id="what" class="band">
   <h2>Was der Assistent für Ihr Team erledigt.</h2>
   <p class="sub">Das alles macht unser eigener Assistent jeden Tag. Ihrer wird mit den Programmen verbunden, die Ihr Unternehmen nutzt.</p>
-  <ul class="list"><li><b>Findet das Gespräch</b><span>Schlägt nach, was mit einem Kunden vereinbart wurde, quer durch Chat- und Nachrichtenverläufe.</span></li><li><b>Behält Rechnungen im Blick</b><span>Listet offene Rechnungen auf, fasst sie zusammen und bereitet neue Rechnungen und Auftragsbestätigungen vor.</span></li><li><b>Pflegt das CRM</b><span>Legt Deals an und ergänzt sie, damit nichts davon abhängt, dass jemand ans Eintippen denkt.</span></li><li><b>Fasst das Postfach zusammen</b><span>Sagt jedem, was in seinen E-Mails gerade Aufmerksamkeit braucht.</span></li><li><b>Liest Dokumente</b><span>Nimmt PDFs auf, auch gescannte, und beantwortet Fragen dazu.</span></li><li><b>Spricht Ihre Sprache</b><span>Antwortet in der Sprache, in der Ihre Kolleginnen und Kollegen schreiben.</span></li></ul>
+  <ul class="list"><li data-reveal style="--d:0.00s"><b>Findet das Gespräch</b><span>Schlägt nach, was mit einem Kunden vereinbart wurde, quer durch Chat- und Nachrichtenverläufe.</span></li><li data-reveal style="--d:0.07s"><b>Behält Rechnungen im Blick</b><span>Listet offene Rechnungen auf, fasst sie zusammen und bereitet neue Rechnungen und Auftragsbestätigungen vor.</span></li><li data-reveal style="--d:0.14s"><b>Pflegt das CRM</b><span>Legt Deals an und ergänzt sie, damit nichts davon abhängt, dass jemand ans Eintippen denkt.</span></li><li data-reveal style="--d:0.21s"><b>Fasst das Postfach zusammen</b><span>Sagt jedem, was in seinen E-Mails gerade Aufmerksamkeit braucht.</span></li><li data-reveal style="--d:0.28s"><b>Liest Dokumente</b><span>Nimmt PDFs auf, auch gescannte, und beantwortet Fragen dazu.</span></li><li data-reveal style="--d:0.35s"><b>Spricht Ihre Sprache</b><span>Antwortet in der Sprache, in der Ihre Kolleginnen und Kollegen schreiben.</span></li></ul>
   <p class="note">Derzeit binden wir HubSpot, Lexoffice, Gmail und Kundenkommunikation über WhatsApp an. Weitere Programme kommen je Unternehmen hinzu.</p>
 </section>
 
 <section>
   <h2>Sorgfältig gebaut.</h2>
   <p class="sub">Ein Assistent, der in Ihrem Namen handeln darf, muss zuerst vertrauenswürdig sein.</p>
-  <div class="grid"><div class="card"><h3>Sie behalten die Kontrolle</h3><p>Bevor etwas angelegt oder verschickt wird, zeigt der Assistent, was er vorhat, und wartet auf Ihre Bestätigung.</p></div><div class="card"><h3>Jedes Unternehmen für sich</h3><p>Jedes Unternehmen hat seinen eigenen Assistenten, seine eigene Adresse und seine eigene Datenbank. Zwischen Unternehmen wird nichts geteilt.</p></div><div class="card"><h3>Im Alltag bewährt</h3><p>Wir haben Adam für unser eigenes Team bei der A&nbsp;&amp;&nbsp;H&nbsp;GmbH gebaut und verlassen uns jeden Arbeitstag darauf. Jetzt öffnen wir ihn für weitere Unternehmen.</p></div></div>
+  <div class="grid"><div class="card" data-reveal style="--d:0.00s"><h3>Sie behalten die Kontrolle</h3><p>Bevor etwas angelegt oder verschickt wird, zeigt der Assistent, was er vorhat, und wartet auf Ihre Bestätigung.</p></div><div class="card" data-reveal style="--d:0.07s"><h3>Jedes Unternehmen für sich</h3><p>Jedes Unternehmen hat seinen eigenen Assistenten, seine eigene Adresse und seine eigene Datenbank. Zwischen Unternehmen wird nichts geteilt.</p></div><div class="card" data-reveal style="--d:0.14s"><h3>Im Alltag bewährt</h3><p>Wir haben Adam für unser eigenes Team bei der A&nbsp;&amp;&nbsp;H&nbsp;GmbH gebaut und verlassen uns jeden Arbeitstag darauf. Jetzt öffnen wir ihn für weitere Unternehmen.</p></div></div>
 </section>
 
 <section id="contact" class="closing band">
@@ -72,5 +94,6 @@
     <nav aria-label="Rechtliches"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="mailto:info@ahgmbh.com">info@ahgmbh.com</a></nav>
   </div>
 </footer>
+<script src="../site.js" defer></script>
 </body>
 </html>

@@ -8,4 +8,6 @@ The design follows the Ground0 brand: strictly monochrome (`#0A0A0A` / `#FFFFFF`
 - Legal pages: `de/impressum.html`, `de/datenschutz.html` (authoritative) and their translations `legal-notice.html`, `privacy.html`.
 - Served by GitHub Pages from the `main` branch. The privacy policy names GitHub as the host; update it if the hosting changes.
 
+The home pages have three scripted demos (the chat, the sign-in and the workflow run) driven by `site.js`: a small dependency-free script that replays the `data-step` elements of each `data-demo` when it scrolls into view. Without scripts or with reduced motion the demos show their final state.
+
 All links are relative, so the site works both on the custom domain and under the `github.io` project path.

@@ -109,3 +109,74 @@ footer { border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent
 .legal ul { padding-left: 20px; }
 .legal address { font-style: normal; }
 .legal .muted { color: var(--muted-foreground); font-size: 14px; }
+
+/* ── Motion ──────────────────────────────────────────────────────────────
+   Everything below only applies once site.js has run (html.js). Without
+   scripts, or with reduced motion, the demos show their final state. */
+.js [data-reveal] { opacity: 0; filter: blur(6px); transform: translateY(16px); transition: opacity .55s ease, filter .55s ease, transform .55s ease; transition-delay: var(--d, 0s); }
+.js [data-reveal].in { opacity: 1; filter: none; transform: none; }
+
+/* pointer spotlight on cards */
+.card, .list li { position: relative; isolation: isolate; }
+.card::after, .list li::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; opacity: 0; transition: opacity .25s; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), color-mix(in srgb, var(--foreground) 9%, transparent), transparent 70%); }
+.card:hover::after, .list li:hover::after { opacity: 1; }
+.list li { transition: border-color .15s; }
+.list li:hover { border-color: color-mix(in srgb, var(--foreground) 20%, transparent); }
+
+/* scripted chat */
+.chat-body { min-height: 268px; }
+.status { font-family: var(--mono); font-size: 12px; color: var(--muted-foreground); margin: 14px 4px 2px; }
+.status::before { content: "✓ "; color: var(--foreground); }
+.js .chat [data-step] { display: none; }
+.js .chat [data-step].on { display: block; animation: pop .38s cubic-bezier(.2, .9, .3, 1.25); }
+.msg.me { transform-origin: 100% 100%; }
+.msg.bot { transform-origin: 0 100%; }
+@keyframes pop { from { opacity: 0; transform: translateY(8px) scale(.94); } to { opacity: 1; transform: none; } }
+.dots { display: flex; gap: 5px; padding: 15px 16px; animation: pop .25s ease; }
+.dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--muted-foreground); animation: bounce .9s infinite; }
+.dots span:nth-child(2) { animation-delay: .15s; }
+.dots span:nth-child(3) { animation-delay: .3s; }
+@keyframes bounce { 0%, 60%, 100% { transform: none; opacity: .5; } 30% { transform: translateY(-5px); opacity: 1; } }
+.chip { transition: transform .15s, opacity .3s; }
+.chip.pressed { transform: scale(.9); }
+.chips:has(.pressed) .chip:not(.pressed) { opacity: .35; }
+
+/* feature rows: text on the left, a dotted stage on the right */
+.rows { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.row { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); }
+.row + .row { border-top: 1px solid var(--border); }
+.row-text { padding: 44px 40px; }
+.row-text h3 { font-family: var(--mono); font-size: 20px; line-height: 1.3; letter-spacing: -.03em; margin: 0 0 14px; text-wrap: balance; }
+.row-text p { color: var(--muted-foreground); margin: 0 0 14px; }
+.row-text .fine { font-size: 13.5px; }
+.stage { border-left: 1px solid var(--border); padding: 48px 40px; display: grid; place-items: center; min-height: 440px; background-color: var(--band); background-image: radial-gradient(circle, color-mix(in srgb, var(--foreground) 16%, transparent) 1px, transparent 1.4px); background-size: 20px 20px; }
+@media (max-width: 900px) { .row { grid-template-columns: 1fr; } .stage { border-left: 0; border-top: 1px solid var(--border); padding: 32px 18px; min-height: 0; } .row-text { padding: 32px 24px; } }
+
+/* workflow that runs step by step */
+.flow { width: 100%; max-width: 460px; }
+.node { position: relative; display: flex; align-items: center; gap: 14px; padding: 15px 16px; margin-top: 30px; background: var(--background); border: 1px solid var(--border); border-radius: 12px; transition: border-color .4s, box-shadow .4s, opacity .45s, transform .45s cubic-bezier(.2, .9, .3, 1.15); }
+.node:first-child { margin-top: 0; }
+.node + .node::before { content: ""; position: absolute; left: 50%; top: -31px; width: 1.5px; height: 30px; background: var(--foreground); transform: scaleY(0); transform-origin: top; transition: transform .35s ease; }
+.node.gap { margin-top: 46px; }
+.node.gap::before { display: none; }
+.ico { flex: none; width: 38px; height: 38px; border-radius: 8px; display: grid; place-items: center; font-family: var(--mono); font-weight: 700; font-size: 15px; background: var(--muted); }
+.ico.inv { background: var(--foreground); color: var(--background); }
+.node small { display: block; font-family: var(--mono); font-size: 11.5px; color: var(--muted-foreground); }
+.node b { display: block; font-weight: 500; font-size: 14.5px; line-height: 1.4; min-height: 1.4em; }
+.node > div { min-width: 0; flex: 1; }
+.badge { flex: none; font-family: var(--mono); font-style: normal; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; border: 1px solid var(--foreground); border-radius: 999px; padding: 3px 9px; transition: opacity .3s, transform .3s; }
+.check { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border); border-top-color: var(--foreground); animation: spin .8s linear infinite; display: grid; place-items: center; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.typing::after { content: "▍"; color: var(--muted-foreground); animation: blink 1s infinite; }
+.addr { display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 14px; background: var(--background); border: 1px solid var(--border); border-radius: 999px; padding: 11px 18px; min-height: 46px; transition: opacity .45s, transform .45s; }
+.addr::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--foreground); flex: none; }
+/* final state (also what shows without scripts) */
+.node.done, html:not(.js) .node:not(.plain) { border-color: var(--foreground); box-shadow: 0 4px 6px -1px rgb(0 0 0 / .08); }
+.node.done .check, html:not(.js) .check { animation: none; border-color: var(--foreground); background: var(--foreground); }
+.node.done .check::after, html:not(.js) .check::after { content: ""; width: 9px; height: 5px; margin-top: -2px; border-left: 2px solid var(--background); border-bottom: 2px solid var(--background); transform: rotate(-45deg); }
+.node.done .badge, html:not(.js) .badge { display: none; }
+html:not(.js) .node + .node::before { transform: none; }
+.js .flow [data-step] { opacity: 0; transform: translateY(12px); }
+.js .flow [data-step].on { opacity: 1; transform: none; }
+.js .flow .node.on::before { transform: scaleY(1); }
+@media (max-width: 600px) { .chat-body { min-height: 336px; } }
