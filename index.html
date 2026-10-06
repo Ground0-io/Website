@@ -13,15 +13,16 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ground0.io/">
 <meta name="color-scheme" content="light dark">
+<link rel="preload" href="fonts/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-  <a class="brand" href="#"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><circle cx="16" cy="16" r="7.5" fill="none" stroke="var(--accent-ink)" stroke-width="3.2"/><circle cx="16" cy="16" r="1.9" fill="var(--accent-ink)"/></svg><span>Ground0</span></a>
+<header class="bar"><div class="wrap top">
+  <a class="brand" href="#" aria-label="Ground0">ground0<span class="cursor" aria-hidden="true">|</span></a>
   <nav class="nav" aria-label="Main"><a href="#how">How it works</a><a href="#what">What it does</a><a href="#contact">Contact</a><a class="lang" href="de/" hreflang="de" lang="de">Deutsch</a></nav>
-</header>
+</div></header>
+<div class="wrap">
 <main>
 <div class="hero">
   <div>
@@ -45,7 +46,7 @@
   <div class="grid"><div class="card"><div class="num">1</div><h3>Your own address</h3><p>Each company gets its own subdomain on ground0.io and an assistant with a name the team chooses. Ours is called Adam.</p></div><div class="card"><div class="num">2</div><h3>Sign in with Google</h3><p>Your team uses the Google accounts they already have. No extra passwords, and only your people get in.</p></div><div class="card"><div class="num">3</div><h3>Ask in your own words</h3><p>In the browser today, on desktop and phone. An iPhone app is in development.</p></div></div>
 </section>
 
-<section id="what">
+<section id="what" class="band">
   <h2>What the assistant does for your team.</h2>
   <p class="sub">These are things our own assistant does every day. Yours is connected to the tools your company uses.</p>
   <ul class="list"><li><b>Finds the conversation</b><span>Looks up what was agreed with a customer across chat and message history.</span></li><li><b>Keeps track of invoices</b><span>Lists and summarises open invoices, and prepares new invoices and order confirmations.</span></li><li><b>Keeps the CRM up to date</b><span>Creates and completes deals, so nothing depends on someone remembering to type it in.</span></li><li><b>Summarises the inbox</b><span>Tells each person what needs their attention in their email.</span></li><li><b>Reads documents</b><span>Takes in PDFs, including scanned ones, and answers questions about them.</span></li><li><b>Speaks your language</b><span>Answers in the language your colleagues write in.</span></li></ul>
@@ -58,7 +59,7 @@
   <div class="grid"><div class="card"><h3>You stay in control</h3><p>Before anything is created or sent, the assistant shows you what it is about to do and waits for your confirmation.</p></div><div class="card"><h3>Each company separate</h3><p>Every company has its own assistant, its own address and its own database. Nothing is shared between companies.</p></div><div class="card"><h3>Proven in daily use</h3><p>We built Adam for our own team at A&nbsp;&amp;&nbsp;H&nbsp;GmbH and rely on it every working day. Now we are opening it to other companies.</p></div></div>
 </section>
 
-<section id="contact" class="closing">
+<section id="contact" class="closing band">
   <h2>Would an assistant like this help your team?</h2>
   <p class="sub">Tell us which tools you work with and what takes up your day. We will show you what an assistant could take over.</p>
   <div class="actions"><a class="btn primary" href="mailto:info@ahgmbh.com?subject=Ground0">info@ahgmbh.com</a><a class="btn" href="tel:+4973069293600">+49 7306 9293600</a></div>
@@ -67,7 +68,7 @@
 </div>
 <footer>
   <div class="wrap foot">
-    <span>© 2026 A&nbsp;&amp;&nbsp;H&nbsp;GmbH · Ground0 is a service of A&nbsp;&amp;&nbsp;H&nbsp;GmbH</span>
+    <div><span class="mark">ground0</span>The ground where your team&#39;s work begins<br>© 2026 A&nbsp;&amp;&nbsp;H&nbsp;GmbH · Ground0 is a service of A&nbsp;&amp;&nbsp;H&nbsp;GmbH</div>
     <nav aria-label="Legal"><a href="legal-notice.html">Legal notice</a><a href="privacy.html">Privacy</a><a href="mailto:info@ahgmbh.com">info@ahgmbh.com</a></nav>
   </div>
 </footer>

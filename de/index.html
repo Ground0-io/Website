@@ -13,15 +13,16 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ground0.io/de/">
 <meta name="color-scheme" content="light dark">
+<link rel="preload" href="../fonts/space-mono-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-  <a class="brand" href="#"><svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="var(--accent)"/><circle cx="16" cy="16" r="7.5" fill="none" stroke="var(--accent-ink)" stroke-width="3.2"/><circle cx="16" cy="16" r="1.9" fill="var(--accent-ink)"/></svg><span>Ground0</span></a>
+<header class="bar"><div class="wrap top">
+  <a class="brand" href="#" aria-label="Ground0">ground0<span class="cursor" aria-hidden="true">|</span></a>
   <nav class="nav" aria-label="Hauptnavigation"><a href="#how">So funktioniert es</a><a href="#what">Was er kann</a><a href="#contact">Kontakt</a><a class="lang" href="../" hreflang="en" lang="en">English</a></nav>
-</header>
+</div></header>
+<div class="wrap">
 <main>
 <div class="hero">
   <div>
@@ -45,7 +46,7 @@
   <div class="grid"><div class="card"><div class="num">1</div><h3>Ihre eigene Adresse</h3><p>Jedes Unternehmen erhält eine eigene Subdomain auf ground0.io und einen Assistenten, dessen Namen das Team wählt. Unserer heißt Adam.</p></div><div class="card"><div class="num">2</div><h3>Mit Google anmelden</h3><p>Ihr Team nutzt die vorhandenen Google-Konten. Keine zusätzlichen Passwörter, und nur Ihre Leute haben Zugang.</p></div><div class="card"><div class="num">3</div><h3>In eigenen Worten fragen</h3><p>Heute im Browser, am Schreibtisch und auf dem Handy. Eine iPhone-App ist in Entwicklung.</p></div></div>
 </section>
 
-<section id="what">
+<section id="what" class="band">
   <h2>Was der Assistent für Ihr Team erledigt.</h2>
   <p class="sub">Das alles macht unser eigener Assistent jeden Tag. Ihrer wird mit den Programmen verbunden, die Ihr Unternehmen nutzt.</p>
   <ul class="list"><li><b>Findet das Gespräch</b><span>Schlägt nach, was mit einem Kunden vereinbart wurde, quer durch Chat- und Nachrichtenverläufe.</span></li><li><b>Behält Rechnungen im Blick</b><span>Listet offene Rechnungen auf, fasst sie zusammen und bereitet neue Rechnungen und Auftragsbestätigungen vor.</span></li><li><b>Pflegt das CRM</b><span>Legt Deals an und ergänzt sie, damit nichts davon abhängt, dass jemand ans Eintippen denkt.</span></li><li><b>Fasst das Postfach zusammen</b><span>Sagt jedem, was in seinen E-Mails gerade Aufmerksamkeit braucht.</span></li><li><b>Liest Dokumente</b><span>Nimmt PDFs auf, auch gescannte, und beantwortet Fragen dazu.</span></li><li><b>Spricht Ihre Sprache</b><span>Antwortet in der Sprache, in der Ihre Kolleginnen und Kollegen schreiben.</span></li></ul>
@@ -58,7 +59,7 @@
   <div class="grid"><div class="card"><h3>Sie behalten die Kontrolle</h3><p>Bevor etwas angelegt oder verschickt wird, zeigt der Assistent, was er vorhat, und wartet auf Ihre Bestätigung.</p></div><div class="card"><h3>Jedes Unternehmen für sich</h3><p>Jedes Unternehmen hat seinen eigenen Assistenten, seine eigene Adresse und seine eigene Datenbank. Zwischen Unternehmen wird nichts geteilt.</p></div><div class="card"><h3>Im Alltag bewährt</h3><p>Wir haben Adam für unser eigenes Team bei der A&nbsp;&amp;&nbsp;H&nbsp;GmbH gebaut und verlassen uns jeden Arbeitstag darauf. Jetzt öffnen wir ihn für weitere Unternehmen.</p></div></div>
 </section>
 
-<section id="contact" class="closing">
+<section id="contact" class="closing band">
   <h2>Würde so ein Assistent Ihrem Team helfen?</h2>
   <p class="sub">Sagen Sie uns, mit welchen Programmen Sie arbeiten und was Ihren Tag füllt. Wir zeigen Ihnen, was ein Assistent übernehmen könnte.</p>
   <div class="actions"><a class="btn primary" href="mailto:info@ahgmbh.com?subject=Ground0">info@ahgmbh.com</a><a class="btn" href="tel:+4973069293600">+49 7306 9293600</a></div>
@@ -67,7 +68,7 @@
 </div>
 <footer>
   <div class="wrap foot">
-    <span>© 2026 A&nbsp;&amp;&nbsp;H&nbsp;GmbH · Ground0 ist ein Angebot der A&nbsp;&amp;&nbsp;H&nbsp;GmbH</span>
+    <div><span class="mark">ground0</span>Der Boden, auf dem die Arbeit Ihres Teams beginnt<br>© 2026 A&nbsp;&amp;&nbsp;H&nbsp;GmbH · Ground0 ist ein Angebot der A&nbsp;&amp;&nbsp;H&nbsp;GmbH</div>
     <nav aria-label="Rechtliches"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a><a href="mailto:info@ahgmbh.com">info@ahgmbh.com</a></nav>
   </div>
 </footer>
