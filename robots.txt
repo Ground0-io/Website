@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ground0.io/sitemap.xml
