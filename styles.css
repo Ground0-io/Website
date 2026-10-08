@@ -459,9 +459,11 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
      Where it starts: the first two companies stand whole between the two fades, as far to the right as they can,
      so the page opens on both of them and they stay whole for the first seconds. --gzh-roll-pair is the width of
      those two with the gap between them (the page's script and site.js measure it); --gzh-roll-lead is how far
-     the track is moved to the right for that, between 30px and 120px past the left fade. */
+     the track is moved to the right for that: the first entry starts 56px to 120px past the left fade. On a
+     phone the strip is barely wider than the two, and 56px lets the second one finish arriving while the row
+     itself fades in, so that the first one is not already leaving when the page has settled. */
   .gzh.gzh-js .gzh-roll-track { flex-wrap: nowrap; gap: 0; width: max-content; will-change: transform;
-    --gzh-roll-lead: calc(var(--gzh-roll-fade) - var(--gzh-roll-gap) + clamp(30px, 100cqi - 2 * var(--gzh-roll-fade) - var(--gzh-roll-pair, 268px) - 5px, 120px));
+    --gzh-roll-lead: calc(var(--gzh-roll-fade) - var(--gzh-roll-gap) + clamp(56px, 100cqi - 2 * var(--gzh-roll-fade) - var(--gzh-roll-pair, 268px) - 5px, 120px));
     animation: gzh-roll calc(var(--gzh-roll-k) * 8.5s) linear infinite paused; }
   .gzh.gzh-js .gzh-roll-track > .gzh-lockup { display: flex; flex: none; margin-inline-start: calc(var(--gzh-roll-gap) + var(--gzh-roll-fit, 0px)); }
   /* A strip under 320px wide (a screen of 320 to 351px) holds two entries at most. There the open slot stays out,
