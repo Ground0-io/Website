@@ -270,7 +270,7 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
    are the only colour on the site: each company's own, inside its own frame.
    Layout answers to the wrapper's own width (container queries), not the viewport:
    under 620px one column and stacked windows, from 620px the two windows side by side
-   with a slight 3D pose, from 1040px headline left and windows right. */
+   with a slight 3D pose, from 1000px headline left and windows right. */
 .gzh, .gzh *, .gzh *::before, .gzh *::after { box-sizing: border-box; }
 .gzh {
   /* Ground0's own surface: black and white, no accent */
@@ -386,8 +386,8 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
 /* the calm patches: each block of words sits on its own nearly opaque patch, only as large as the block, so no
    grid line or registration tick shows through a word while the grid keeps its strength everywhere else.
    The canvas draws nothing over the text column either. */
-.gzh .gzh-h1, .gzh .gzh-lead, .gzh .gzh-acts, .gzh .gzh-proof, .gzh .gzh-eg { position: relative; }
-.gzh .gzh-h1::after, .gzh .gzh-lead::after, .gzh .gzh-acts::after, .gzh .gzh-proof::after, .gzh .gzh-eg::after {
+.gzh .gzh-h1, .gzh .gzh-lead, .gzh .gzh-acts, .gzh .gzh-proof, .gzh .gzh-eg, .gzh .gzh-note { position: relative; }
+.gzh .gzh-h1::after, .gzh .gzh-lead::after, .gzh .gzh-acts::after, .gzh .gzh-proof::after, .gzh .gzh-eg::after, .gzh .gzh-note::after {
   content: ""; position: absolute; z-index: -1; inset: -4px -2px; border-radius: 6px; pointer-events: none;
   background: rgb(var(--gzh-bg-rgb) / var(--gzh-calm)); box-shadow: 0 0 12px 4px rgb(var(--gzh-bg-rgb) / var(--gzh-calm)); }
 @keyframes gzh-blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
@@ -402,7 +402,7 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
 .gzh .gzh-more:hover { text-decoration-color: var(--gzh-fg); }
 .gzh .gzh-more .gzh-i { width: 15px; height: 15px; transition: transform 0.2s ease; }
 .gzh .gzh-more:hover .gzh-i { transform: translateX(3px); }
-.gzh .gzh-cta:focus-visible, .gzh .gzh-more:focus-visible, .gzh .gzh-replay:focus-visible { outline: 2px solid var(--gzh-fg); outline-offset: 3px; border-radius: 8px; }
+.gzh .gzh-cta:focus-visible, .gzh .gzh-more:focus-visible, .gzh .gzh-replay:focus-visible, .gzh .gzh-pause:focus-visible { outline: 2px solid var(--gzh-fg); outline-offset: 3px; border-radius: 8px; }
 .gzh .gzh-proof { display: flex; flex-direction: column; gap: 12px; }
 .gzh .gzh-proof-l { font: 400 13px/18px var(--gzh-sans); color: var(--gzh-fg-3); }
 .gzh .gzh-who { display: flex; flex-wrap: wrap; gap: 14px 30px; }
@@ -424,15 +424,24 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
 .gzh .gzh-eg::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--gzh-fg); flex: none; }
 .gzh.gzh-live .gzh-eg::before { animation: gzh-pulse 2.4s ease-in-out infinite; }
 @keyframes gzh-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
-.gzh .gzh-ctl { display: inline-flex; align-items: center; gap: 10px; }
+.gzh .gzh-ctl { display: inline-flex; align-items: center; gap: 8px; }
 .gzh .gzh-count { font: 400 12px/1 var(--gzh-sans); color: var(--gzh-fg-3); font-variant-numeric: tabular-nums; }
 .gzh .gzh-count:empty { display: none; }
 .gzh .gzh-replay { appearance: none; -webkit-appearance: none; display: inline-flex; align-items: center; gap: 6px; height: 32px; padding: 0 11px; margin: 0; border: 1px solid var(--gzh-rule); border-radius: 8px; background: var(--gzh-bg); color: var(--gzh-fg-2); font: 500 13px/1 var(--gzh-sans); letter-spacing: normal; text-transform: none; cursor: pointer; transition: color 0.15s ease, border-color 0.15s ease; }
 .gzh .gzh-replay:hover { color: var(--gzh-fg); border-color: rgb(255 255 255 / 0.4); }
 .gzh .gzh-replay .gzh-i { width: 13px; height: 13px; }
 .gzh:not(.gzh-js) .gzh-ctl { display: none; }
+/* pause: holds the conversations, the canvas and every looping animation of the hero */
+.gzh .gzh-pause { appearance: none; -webkit-appearance: none; display: inline-grid; place-items: center; width: 32px; height: 32px; padding: 0; margin: 0; border: 1px solid var(--gzh-rule); border-radius: 8px; background: var(--gzh-bg); color: var(--gzh-fg-2); cursor: pointer; transition: color 0.15s ease, border-color 0.15s ease; }
+.gzh .gzh-pause:hover, .gzh .gzh-pause[aria-pressed="true"] { color: var(--gzh-fg); border-color: rgb(255 255 255 / 0.4); }
+.gzh .gzh-pause .gzh-i { width: 13px; height: 13px; stroke-width: 2.25; }
+.gzh .gzh-pause[aria-pressed="false"] .gzh-p-off, .gzh .gzh-pause[aria-pressed="true"] .gzh-p-on { display: none; }
+.gzh.gzh-still .gzh-pause { display: none; }
+/* one line under the windows says which language each example is in */
+.gzh .gzh-note { justify-self: start; max-width: 34em; padding-inline: 2px; font: 400 13px/18px var(--gzh-sans); color: var(--gzh-fg-2); text-wrap: pretty; }
+.gzh .gzh-note span { display: inline-block; }
 /* a finger gets a full-size target */
-@media (pointer: coarse) { .gzh .gzh-replay { height: 44px; padding: 0 14px; } }
+@media (pointer: coarse) { .gzh .gzh-replay { height: 44px; padding: 0 14px; } .gzh .gzh-pause { width: 44px; height: 44px; } }
 
 .gzh .gzh-w, .gzh .gzh-float { min-width: 0; }
 .gzh .gzh-win { --gzh-page: var(--gzh-ah-page); --gzh-sidebar: var(--gzh-ah-sidebar); --gzh-raised: var(--gzh-ah-raised); --gzh-sunken: var(--gzh-ah-sunken);
@@ -612,17 +621,19 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
 
 /* ── from 620px: two windows side by side, staggered, with a slight 3D pose ─ */
 @container gzh (min-width: 620px) {
-  .gzh .gzh-wins { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 44px auto 44px; column-gap: 16px; row-gap: 0; }
+  .gzh .gzh-wins { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: 44px auto minmax(44px, auto); column-gap: 16px; row-gap: 0; }
   .gzh .gzh-w-a { grid-column: 1; grid-row: 1 / span 2; }
   .gzh .gzh-w-b { grid-column: 2; grid-row: 2 / span 2; }
   .gzh .gzh-bar { grid-column: 2; grid-row: 1; align-items: flex-start; min-height: 0; padding-inline: 2px; }
+  /* the note sits in the free corner under the left window; the row grows if the note needs a third line */
+  .gzh .gzh-note { grid-column: 1; grid-row: 3; align-self: end; margin-top: 10px; }
   .gzh .gzh-win { transform: perspective(1500px) rotateX(calc(var(--gzh-rx, 1.2deg) + var(--gzh-py, 0) * -2.4deg)) rotateY(calc(var(--gzh-ry, 0deg) + var(--gzh-px, 0) * 3.2deg)); transform-origin: 50% 55%; transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1); }
   .gzh .gzh-w-a .gzh-win { --gzh-ry: 3.6deg; }
   .gzh .gzh-w-b .gzh-win { --gzh-ry: -3.6deg; }
-  @media (pointer: coarse) { .gzh .gzh-wins { grid-template-rows: 56px auto 56px; } }
+  @media (pointer: coarse) { .gzh .gzh-wins { grid-template-rows: 56px auto minmax(56px, auto); } }
 }
-/* ── from 1040px: headline left, windows right ───────────────────────────── */
-@container gzh (min-width: 1080px) {
+/* ── from 1000px: headline left, windows right ───────────────────────────── */
+@container gzh (min-width: 1000px) {
   .gzh .gzh-in { grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr); column-gap: 28px; align-items: start; }
   .gzh .gzh-copy { padding-top: 4px; }
   .gzh .gzh-lead { font-size: 18px; }
@@ -631,11 +642,18 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
   /* the German headline's longest line, "Geschäft kennt.", is one letter longer */
   .gzh:lang(de) .gzh-h1 { font-size: clamp(34px, 11.2cqi, 49px); }
 }
+@container gzh (min-width: 1000px) and (max-width: 1079.98px) {
+  /* a 1024px screen: the text column gives a little to the windows, so they keep their width */
+  .gzh .gzh-in { grid-template-columns: minmax(0, 0.6fr) minmax(0, 1fr); column-gap: 24px; }
+}
 @container gzh (max-width: 339.98px) {
   /* the narrowest phones wrap more, so the thread is taller there */
   .gzh .gzh-win { --gzh-thread-h: 412px; }
 }
 @container gzh (max-width: 619.98px) {
+  /* stacked windows are tall, so the language note moves up, right under the label */
+  .gzh .gzh-bar { order: -2; }
+  .gzh .gzh-note { order: -1; margin-top: -8px; }
   /* a phone shows the hero edge to edge, so the grid keeps its strength right up to the sides */
   .gzh .gzh-grid { -webkit-mask-image: radial-gradient(ellipse 130% 80% at 50% 58%, #000 0, #000 60%, rgb(0 0 0 / 0.86) 100%); mask-image: radial-gradient(ellipse 130% 80% at 50% 58%, #000 0, #000 60%, rgb(0 0 0 / 0.86) 100%); }
 }

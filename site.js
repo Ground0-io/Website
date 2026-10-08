@@ -16,7 +16,7 @@
   var mqReduce = media("(prefers-reduced-motion: reduce)");
   var mqFine = media("(hover: hover) and (pointer: fine)");
   var reduce = !!mqReduce.matches;
-  var inView = false, seen = false, live = false;
+  var inView = false, seen = false, live = false, paused = false;
   var raf = window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function (f) { return setTimeout(function () { f(Date.now()); }, 16); };
   var STOP = {};          // thrown through a script when its run is cancelled or held
   var STATES = 5;         // question, steps running, answer, draft card, receipt
@@ -277,7 +277,7 @@
   /* ── signal layer: slow dust and a few pulses travelling along the grid ─── */
   var fx = (function () {
     var cv = one(".gzh-fx"), ctx = cv && cv.getContext ? cv.getContext("2d") : null;
-    var copy = one(".gzh-copy"), bar = one(".gzh-bar"), floor = one(".gzh-floor");
+    var copy = one(".gzh-copy"), bar = one(".gzh-bar"), note = one(".gzh-note"), floor = one(".gzh-floor");
     var W = 0, H = 0, cell = 48, gx = 8, bottom = 0, calm = null, dust = [], pulses = [], maxPulses = 3;
     var frameId = 0, last = 0, spawnIn = 0.4, running = false;
     if (!ctx) return { size: function () {}, start: function () {}, stop: function () {}, still: function () {} };
@@ -300,6 +300,7 @@
       bottom = H - (floor ? floor.offsetHeight : 0);
       calm = [box(copy, 22)];
       if (bar && bar.offsetWidth) calm.push(box(bar, 6));
+      if (note && note.offsetWidth) calm.push(box(note, 6));
       maxPulses = small ? 2 : 4;
       var n = Math.min(small ? 14 : 34, Math.round((W * H) / 26000));
       dust = [];
@@ -396,11 +397,13 @@
 
   /* ── the wrapper decides: play while on screen and the tab is visible ───── */
   function update() {
-    var now = inView && !doc.hidden && !reduce;
+    var now = inView && !doc.hidden && !reduce && !paused;
     if (inView && !seen) {
       seen = true;
       root.classList.add("gzh-seen");
       fx.size();
+      // fetch the Arabic face now, a few seconds before the one Arabic message is typed, so it does not change face mid-word
+      if (doc.fonts && doc.fonts.load) doc.fonts.load('15px "IBM Plex Sans Arabic"', "\u0645").catch(function () {});
       if (!reduce) setTimeout(play, 350);
     }
     if (now === live) return;
@@ -417,19 +420,37 @@
   else window.addEventListener("resize", function () { fx.size(); players.forEach(function (p) { p.follow(); }); });
   if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { fx.size(); players.forEach(function (p) { p.follow(); }); });
 
+  // Replay starts both examples again. With reduced motion nothing plays, so the same button shows the next
+  // step instead and says so, on screen and to a screen reader.
+  var replay = one(".gzh-replay"), replayText = replay && one("span", replay), pause = one(".gzh-pause");
+  var names = replay && { text: replayText ? replayText.textContent : "", label: replay.getAttribute("aria-label") };
+  function nameReplay() {
+    if (!replay || !replayText) return;
+    replayText.textContent = reduce ? replay.getAttribute("data-step") || names.text : names.text;
+    var l = reduce ? replay.getAttribute("data-step-label") : names.label;
+    if (l) replay.setAttribute("aria-label", l);
+  }
+  // Pause holds everything that moves in the hero: the conversations, the canvas and the looping CSS animations.
+  function setPaused(on) {
+    paused = on;
+    if (pause) pause.setAttribute("aria-pressed", on ? "true" : "false");
+    update();
+  }
   function setMotion() {
     reduce = !!mqReduce.matches;
     root.classList.toggle("gzh-still", reduce);
-    if (reduce) { still(STATES); live = false; root.classList.remove("gzh-live"); fx.still(); }
+    nameReplay();
+    if (reduce) { paused = false; if (pause) pause.setAttribute("aria-pressed", "false"); still(STATES); live = false; root.classList.remove("gzh-live"); fx.still(); }
     else { if (count) count.textContent = ""; if (seen) play(); update(); }
   }
   if (mqReduce.addEventListener) mqReduce.addEventListener("change", setMotion);
 
-  var replay = one(".gzh-replay");
   if (replay) replay.addEventListener("click", function () {
-    if (reduce) still(state % STATES + 1);   // step through the states, no animation
-    else play();
+    if (reduce) return still(state % STATES + 1);   // step through the states, no animation
+    if (paused) setPaused(false);
+    play();
   });
+  if (pause) pause.addEventListener("click", function () { if (!reduce) setPaused(!paused); });
 
   /* ── a few degrees of tilt towards a fine pointer ───────────────────────── */
   var wins = one(".gzh-wins"), stage = one(".gzh-stage"), tiltId = 0, tx = 0, ty = 0;
@@ -447,6 +468,7 @@
   }
 
   players.forEach(function (p) { p.reset(); });
+  nameReplay();
   if (reduce) { still(STATES); fx.size(); fx.still(); }
   update();
 })();
