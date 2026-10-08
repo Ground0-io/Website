@@ -250,14 +250,16 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
 .motion [data-demo]:not(.fin) [data-step]:not(.on) { opacity: 0; transform: translate3d(0, 10px, 0); }
 .motion .node::before { transition: transform 0.35s ease; }
 .motion [data-demo]:not(.fin) .node:not(.on)::before { transform: scaleY(0); }
-.motion [data-demo]:not(.fin) [data-done]:not(.done) .state { border: 2px solid var(--rule); border-top-color: var(--fg); background: none; animation: spin 0.8s linear infinite; }
+.motion [data-demo]:not(.fin) [data-done]:not(.done) .state { border: 2px solid var(--rule); border-top-color: var(--fg); background: none; }
+/* they turn only while their step is on screen and running, never in an example nobody has scrolled to */
+.motion [data-demo]:not(.fin) [data-done].on:not(.done) .state { animation: spin 0.8s linear infinite; }
 .motion [data-demo]:not(.fin) [data-done]:not(.done) .state::after { content: none; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .motion [data-demo]:not(.fin) [data-done]:not(.done) .sw > :first-child, .motion [data-demo]:not(.fin) .draft[data-done]:not(.done) .draft-ft > :first-child { opacity: 1; visibility: visible; }
 .motion [data-demo]:not(.fin) [data-done]:not(.done) .sw > :last-child, .motion [data-demo]:not(.fin) .draft[data-done]:not(.done) .draft-ft > :last-child { opacity: 0; visibility: hidden; }
 .draft.done, html:not(.motion) .draft, .fin .draft { border-style: solid; border-color: var(--rule); }
 .key.pressed { transform: scale(0.94); box-shadow: 0 0 0 4px rgb(255 255 255 / 0.2); }
-.motion [data-demo]:not(.fin) [data-done]:not(.done) .bars i { animation: talk 0.9s ease-in-out infinite alternate; animation-delay: calc(var(--h) * -11ms); }
+.motion [data-demo]:not(.fin) [data-done].on:not(.done) .bars i { animation: talk 0.9s ease-in-out infinite alternate; animation-delay: calc(var(--h) * -11ms); }
 @keyframes talk { from { transform: scaleY(0.35); } to { transform: scaleY(1); } }
 .rest { visibility: hidden; }
 .typing::after { content: ""; display: inline-block; width: 1.5px; height: 1.1em; margin: 0 -2.5px 0 1px; vertical-align: -0.2em; background: currentColor; animation: blink 1s steps(1, end) infinite; }
