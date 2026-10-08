@@ -429,13 +429,16 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
 .gzh .gzh-proof .gzh-company { color: var(--gzh-fg-2); }
 
 /* ── the roll: the assistants running today, as a strip that drifts past ─── */
-/* The markup holds each company once, then a dashed open slot. As written here that is a still row, and that is
-   what shows without scripts and with reduced motion. With scripts, a few lines in the page repeat the list
-   (.gzh-roll-copy, hidden from assistive technology) and the rules further down turn the row into a moving strip. */
+/* The markup holds each company once, then a dashed open slot. As written here that is a still row of the
+   companies, and that is what shows without scripts and with reduced motion. With scripts, a few lines in the page
+   repeat the list (.gzh-roll-copy, hidden from assistive technology) and the rules further down turn the row into
+   a moving strip. */
 .gzh .gzh-roll { min-width: 0; border-radius: 8px; }
 .gzh .gzh-roll:focus-visible { outline: 2px solid var(--gzh-fg); outline-offset: 5px; }
 .gzh .gzh-roll-track { display: flex; flex-wrap: wrap; gap: 14px var(--gzh-roll-gap); --gzh-roll-gap: 30px; }
-.gzh .gzh-roll-copy { display: none; }
+/* The open slot belongs to the moving strip only. In the still row it would wrap onto a second line and push the
+   product windows down, right beside the hero's own open slot, which says the same. */
+.gzh .gzh-roll-copy, .gzh .gzh-roll-track > .gzh-open { display: none; }
 /* the open slot is quieter than the companies beside it */
 .gzh .gzh-proof .gzh-open .gzh-assistant { font-weight: 500; color: var(--gzh-fg-2); }
 .gzh .gzh-proof .gzh-addr { font-family: var(--gzh-mono); letter-spacing: -0.02em; }
