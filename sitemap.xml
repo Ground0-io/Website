@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://ground0.io/</loc></url>
-  <url><loc>https://ground0.io/de/</loc></url>
-  <url><loc>https://ground0.io/legal-notice.html</loc></url>
-  <url><loc>https://ground0.io/privacy.html</loc></url>
-  <url><loc>https://ground0.io/de/impressum.html</loc></url>
-  <url><loc>https://ground0.io/de/datenschutz.html</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://ground0.io/</loc><xhtml:link rel="alternate" hreflang="en" href="https://ground0.io/"/><xhtml:link rel="alternate" hreflang="de" href="https://ground0.io/de/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ground0.io/"/></url>
+  <url><loc>https://ground0.io/de/</loc><xhtml:link rel="alternate" hreflang="en" href="https://ground0.io/"/><xhtml:link rel="alternate" hreflang="de" href="https://ground0.io/de/"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ground0.io/"/></url>
+  <url><loc>https://ground0.io/legal-notice.html</loc><xhtml:link rel="alternate" hreflang="en" href="https://ground0.io/legal-notice.html"/><xhtml:link rel="alternate" hreflang="de" href="https://ground0.io/de/impressum.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ground0.io/legal-notice.html"/></url>
+  <url><loc>https://ground0.io/de/impressum.html</loc><xhtml:link rel="alternate" hreflang="en" href="https://ground0.io/legal-notice.html"/><xhtml:link rel="alternate" hreflang="de" href="https://ground0.io/de/impressum.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ground0.io/legal-notice.html"/></url>
+  <url><loc>https://ground0.io/privacy.html</loc><xhtml:link rel="alternate" hreflang="en" href="https://ground0.io/privacy.html"/><xhtml:link rel="alternate" hreflang="de" href="https://ground0.io/de/datenschutz.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ground0.io/privacy.html"/></url>
+  <url><loc>https://ground0.io/de/datenschutz.html</loc><xhtml:link rel="alternate" hreflang="en" href="https://ground0.io/privacy.html"/><xhtml:link rel="alternate" hreflang="de" href="https://ground0.io/de/datenschutz.html"/><xhtml:link rel="alternate" hreflang="x-default" href="https://ground0.io/privacy.html"/></url>
 </urlset>
