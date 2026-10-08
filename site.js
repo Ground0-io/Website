@@ -6,6 +6,8 @@
   var doc = document;
   var root = doc.querySelector(".gzh");
   if (!root || root._gzh) return;
+  // The page waits 2.5 s for this file and then shows its still, finished state. If that has happened, leave it be.
+  if (!doc.documentElement.classList.contains("js")) return;
   root._gzh = true;
 
   var one = function (sel, el) { return (el || root).querySelector(sel); };
@@ -458,6 +460,7 @@
   "use strict";
   var doc = document, root = doc.documentElement;
   var all = function (sel, el) { return [].slice.call((el || doc).querySelectorAll(sel)); };
+  root.classList.add("js");   // also when this file came so late that the page already shows its still state
 
   // the contact address: Copy puts it on the clipboard and says so
   all("[data-copy]").forEach(function (btn) {

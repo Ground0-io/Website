@@ -600,10 +600,12 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
 .gzh .gzh-slot-body b { font-weight: 500; color: var(--gzh-fg); }
 
 /* ── first view: staggered rise and fade ─────────────────────────────────── */
-.gzh.gzh-js .gzh-rise { opacity: 0; transform: translate3d(0, 20px, 0); }
-.gzh.gzh-js.gzh-seen .gzh-rise { opacity: 1; transform: none; transition: opacity 0.7s ease, transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1); transition-delay: calc(var(--gzh-n, 0) * 80ms); }
-.gzh.gzh-js .gzh-w.gzh-rise { transform: translate3d(0, 34px, 0); }
-.gzh.gzh-js.gzh-seen .gzh-w.gzh-rise { transform: none; }
+/* Plain CSS animations: they start with the first paint and need nothing from the script file, so the
+   headline, the buttons and the windows are on screen even when that file is slow. */
+.gzh.gzh-js .gzh-rise { animation: gzh-in-o 0.7s ease both, gzh-in-t 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; animation-delay: calc(var(--gzh-n, 0) * 80ms); }
+.gzh.gzh-js .gzh-w.gzh-rise { --gzh-from: 34px; }
+@keyframes gzh-in-o { from { opacity: 0; } }
+@keyframes gzh-in-t { from { transform: translate3d(0, var(--gzh-from, 20px), 0); } }
 .gzh.gzh-live .gzh-float { animation: gzh-float 9s ease-in-out infinite; }
 .gzh.gzh-live .gzh-w-b .gzh-float { animation-duration: 11s; animation-delay: -4s; }
 @keyframes gzh-float { 0%, 100% { transform: translate3d(0, -3px, 0); } 50% { transform: translate3d(0, 4px, 0); } }
@@ -641,11 +643,9 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
 /* ── reduced motion: the finished state, nothing moves ───────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .gzh *, .gzh *::before, .gzh *::after { animation: none !important; transition: none !important; }
-  .gzh.gzh-js .gzh-rise { opacity: 1; transform: none; }
   .gzh .gzh-scan { display: none; }
 }
 .gzh.gzh-still *, .gzh.gzh-still *::before, .gzh.gzh-still *::after { animation: none !important; transition: none !important; }
-.gzh.gzh-still.gzh-js .gzh-rise { opacity: 1; transform: none; }
 .gzh.gzh-still .gzh-scan { display: none; }
 .gzh .gzh-eyebrow::before { content: "$ "; }
 .gzh .gzh-n1 { --gzh-n: 1; } .gzh .gzh-n2 { --gzh-n: 2; } .gzh .gzh-n3 { --gzh-n: 3; }
