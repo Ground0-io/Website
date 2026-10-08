@@ -464,6 +464,12 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
     --gzh-roll-lead: calc(var(--gzh-roll-fade) - var(--gzh-roll-gap) + clamp(30px, 100cqi - 2 * var(--gzh-roll-fade) - var(--gzh-roll-pair, 268px) - 5px, 120px));
     animation: gzh-roll calc(var(--gzh-roll-k) * 8.5s) linear infinite paused; }
   .gzh.gzh-js .gzh-roll-track > .gzh-lockup { display: flex; flex: none; margin-inline-start: calc(var(--gzh-roll-gap) + var(--gzh-roll-fit, 0px)); }
+  /* A strip under 320px wide (a screen of 320 to 351px) holds two entries at most. There the open slot stays out,
+     so that both are companies; the hero's dashed window further down still shows it. */
+  @container gzh-copy (max-width: 319.98px) {
+    .gzh.gzh-js .gzh-roll-track > .gzh-open { display: none; }
+    .gzh.gzh-js .gzh-roll-track { animation-duration: calc((var(--gzh-roll-k) - 1) * 8.5s); }
+  }
   /* It moves while the hero is live (on screen, tab visible, not paused with the hero's button) and the strip
      itself is on screen, and rests under the pointer and under keyboard focus. */
   .gzh.gzh-js.gzh-live .gzh-roll:not(.gzh-roll-out) .gzh-roll-track { animation-play-state: running; }
