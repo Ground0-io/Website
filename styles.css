@@ -23,7 +23,8 @@
   --line: rgb(255 255 255 / 0.1);
   --panel: #111112;
   --raise: #1c1c1e;
-  --grid: rgb(255 255 255 / 0.1);
+  --grid: rgb(255 255 255 / 0.135);
+  --grid-major: rgb(255 255 255 / 0.095);
   --sans: "DM Sans", "DM Sans fallback", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "Space Mono", "Space Mono fallback", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   /* six sizes for everything outside the hero */
@@ -66,11 +67,12 @@ svg.i { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor;
 
 /* Sections sit inside the page frame: hairlines left and right on wide screens, a hairline between sections */
 .frame { position: relative; --fp: var(--pad); }
-@media (min-width: 1200px) { .frame { --fp: calc(var(--pad) - 1px); padding-inline: var(--fp); border-inline: 1px solid var(--line); } main > .frame { border-image: linear-gradient(to bottom, transparent, var(--line) 140px) 1; } }
+@media (min-width: 1200px) { .frame { --fp: calc(var(--pad) - 1px); padding-inline: var(--fp); border-inline: 1px solid var(--line); } }
 section { padding: 88px 0; }
 .frame > section { margin-inline: calc(var(--fp) * -1); padding-inline: var(--fp); border-top: 1px solid var(--line); }
-main > .frame > section:first-child { border-top: 0; padding-top: 56px; }
+.field > .frame > section:first-child { border-top: 0; padding-top: 56px; }
 .head { max-width: 44rem; margin-bottom: 44px; }
+.head.calm { max-width: min(44rem, 100%); }
 .kicker { margin: 0 0 16px; font: 400 var(--t-s)/1 var(--mono); color: var(--fg-2); }
 .kicker::before { content: "$ "; }
 h1, h2, h3 { margin: 0; font-family: var(--mono); font-weight: 700; text-wrap: balance; }
@@ -83,14 +85,21 @@ h3 { font-size: var(--t-l); line-height: 1.3; letter-spacing: -0.025em; }
 .btn.primary { border-color: var(--fg); background: var(--fg); color: var(--bg); font-weight: 600; }
 .btn.primary:hover { opacity: 0.9; }
 
-/* The engineered grid of the hero, used again behind the small demos and the contact section. Never behind words. */
-.grid { background-image: linear-gradient(to right, var(--grid) 1px, transparent 1px), linear-gradient(to bottom, var(--grid) 1px, transparent 1px); background-size: 48px 48px; background-position: 8px 0; }
+/* The engineered grid of the hero runs on behind the whole page, as one sheet: 48px cells, every fourth line
+   a little stronger. Words never stand on it. Headings get a calm patch, text panels are solid, and the
+   small examples are open windows onto it. Its lines fall on the edges of the page frame. */
+.grid, .field > .frame::before { background-image: linear-gradient(to right, var(--grid-major) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-major) 1px, transparent 1px), linear-gradient(to right, var(--grid) 1px, transparent 1px), linear-gradient(to bottom, var(--grid) 1px, transparent 1px); background-size: 192px 192px, 192px 192px, 48px 48px, 48px 48px; background-position: 8px 0; }
+.field { overflow: hidden; }
+.field > .frame { isolation: isolate; }
+.field > .frame::before { content: ""; position: absolute; z-index: -1; top: 0; bottom: 0; left: -100vw; right: -100vw; background-position: 100vw 0; pointer-events: none; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 150px, #000 calc(100% - 170px), transparent 100%); mask-image: linear-gradient(to bottom, transparent 0, #000 150px, #000 calc(100% - 170px), transparent 100%); }
+/* on the home pages the grid line on each edge of the frame is its hairline */
+@media (min-width: 1200px) { .field > .frame { --fp: var(--pad); border-inline: 0; } }
 
 /* How it works: text on the left, a small example on the right */
 .rows { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
 .row { display: grid; grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr); }
 .row + .row { border-top: 1px solid var(--line); }
-.row-text { padding: 44px 40px; }
+.row-text { padding: 44px 40px; background: var(--bg); }
 .row-text p { margin: 14px 0 0; color: var(--fg-2); text-wrap: pretty; }
 .row-text .fine { font-size: var(--t-s); color: var(--fg-3); }
 .stage { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; padding: 48px 40px 56px; border-left: 1px solid var(--line); }
@@ -132,10 +141,10 @@ h3 { font-size: var(--t-l); line-height: 1.3; letter-spacing: -0.025em; }
 
 /* What the assistants do: a few cards, each with one small example */
 .bento { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
-.card { grid-column: span 2; grid-row: span 2; display: grid; grid-template-rows: subgrid; gap: 0; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); overflow: hidden; }
+.card { grid-column: span 2; grid-row: span 2; display: grid; grid-template-rows: subgrid; gap: 0; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
 .card.wide { grid-column: span 3; }
 .shot { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; min-height: 232px; padding: 22px 22px 54px; border-bottom: 1px solid var(--line); }
-.card-text { padding: 20px 22px 24px; }
+.card-text { padding: 20px 22px 24px; background: var(--bg); }
 .card-text small { display: block; margin-bottom: 10px; font: 400 var(--t-xs)/1.3 var(--mono); color: var(--fg-3); }
 .card-text p { margin: 8px 0 0; color: var(--fg-2); text-wrap: pretty; }
 @media (max-width: 980px) { .card, .card.wide { grid-column: span 3; } .card:last-child { grid-column: span 6; } }
@@ -181,7 +190,7 @@ h3 { font-size: var(--t-l); line-height: 1.3; letter-spacing: -0.025em; }
 .bars i { flex: 1; max-width: 5px; height: calc(var(--h) * 1%); border-radius: 2px; background: var(--fg); opacity: 0.85; transform-origin: center; }
 
 /* Built the careful way: three statements on one strip */
-.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 12px; }
+.trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 12px; background: var(--bg); }
 .trio > div { padding: 28px 28px 30px; }
 .trio > div + div { border-left: 1px solid var(--line); }
 .trio .i { width: 20px; height: 20px; margin-bottom: 18px; color: var(--fg); }
