@@ -11,8 +11,10 @@ The design follows the Ground0 brand: black and white (`#0A0A0A` / `#FAFAFA`, ne
 
 ## Home page
 
-- The hero (`.gzh` in the markup and in `styles.css`, the first part of `site.js`): an engineered grid with a ground line, and two product windows that replay one example conversation each. It plays while it is on screen and the tab is visible, and rests otherwise. With reduced motion it shows the finished state and Replay steps through it; without scripts it shows a finished static frame.
-- Below the hero, each `data-demo` plays its `data-step` children once when it comes into view and then offers Replay (second part of `site.js`). Every step keeps its place from the start, so the page does not move while an example plays. Without scripts or with reduced motion every example shows its finished state.
+- The hero (`.gzh` in the markup and in `styles.css`, the first part of `site.js`): an engineered grid with a ground line, and two product windows that replay one example conversation each. It plays while it is on screen and the tab is visible, and rests otherwise; the pause button holds everything that moves in it, Replay starts both examples again. With reduced motion it shows the finished state and the button steps through it; without scripts it shows a finished static frame. A line under the windows says which language each example is in.
+- The first screen does not wait for `site.js`: its entrance is plain CSS. If the script has not started 2.5 seconds after the page began to load, the page drops to its still, finished state (the small script in the `<head>` does this) and stays there.
+- Below the hero the same grid runs on behind the page as one sheet (`.field`). Words never stand on it: headings have a calm patch, text panels are solid, and the small examples are open windows onto it.
+- Each `data-demo` plays its `data-step` children once when it comes into view and then offers Replay (second part of `site.js`). Every step keeps its place from the start, so the page does not move while an example plays. Without scripts or with reduced motion every example shows its finished state.
 - The conversations and cards are examples and are labelled as such. They only show things the two assistants do today.
 
 Links are relative, so the site also works under the `github.io` project path. The exception is `404.html`, which is served for any missing address and therefore uses absolute paths.
