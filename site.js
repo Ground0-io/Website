@@ -416,9 +416,32 @@
     new IntersectionObserver(function (entries) { inView = entries[entries.length - 1].isIntersecting; update(); }, { rootMargin: "-6% 0px -6% 0px", threshold: 0 }).observe(root);
   } else { inView = true; }
   doc.addEventListener("visibilitychange", update);
-  if (window.ResizeObserver) new ResizeObserver(function () { fx.size(); players.forEach(function (p) { p.follow(); }); }).observe(root);
-  else window.addEventListener("resize", function () { fx.size(); players.forEach(function (p) { p.follow(); }); });
-  if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { fx.size(); players.forEach(function (p) { p.follow(); }); });
+
+  // The roll of assistants under the buttons is moved by CSS alone while the hero is live. Three things are left
+  // for here: it rests while the strip itself is off screen (on a phone the hero is taller than the screen); while
+  // it moves it can take keyboard focus, which holds it; and each copy of the list is made a whole number of
+  // pixels wide (up to 4px more before its first entry), so the end of the loop is exactly its start.
+  var roll = one(".gzh-roll"), rollTrack = roll && one(".gzh-roll-track", roll);
+  if (roll && window.IntersectionObserver) {
+    new IntersectionObserver(function (entries) { roll.classList.toggle("gzh-roll-out", !entries[entries.length - 1].isIntersecting); }).observe(roll);
+  }
+  function rollFocus() { if (!roll) return; if (reduce) roll.removeAttribute("tabindex"); else roll.setAttribute("tabindex", "0"); }
+  function rollFit() {
+    var kids = rollTrack ? rollTrack.children : [], k = rollTrack ? +rollTrack.style.getPropertyValue("--gzh-roll-k") : 0, i;
+    if (!k || kids.length <= k) return;
+    for (i = 0; i < kids.length; i += k) kids[i].style.removeProperty("--gzh-roll-fit");
+    if (!kids[k].offsetWidth) return;   // the copies are not shown: a still row
+    // a multiple of 4 CSS pixels is a whole number of screen pixels at every usual pixel ratio (1, 1.25, 1.5, 2, 3)
+    var w = kids[k].getBoundingClientRect().left - kids[0].getBoundingClientRect().left;
+    var fit = Math.ceil((w - 0.01) / 4) * 4 - w;
+    if (fit > 0.001) for (i = 0; i < kids.length; i += k) kids[i].style.setProperty("--gzh-roll-fit", fit + "px");
+  }
+  rollFocus();
+  rollFit();
+
+  if (window.ResizeObserver) new ResizeObserver(function () { fx.size(); players.forEach(function (p) { p.follow(); }); rollFit(); }).observe(root);
+  else window.addEventListener("resize", function () { fx.size(); players.forEach(function (p) { p.follow(); }); rollFit(); });
+  if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { fx.size(); players.forEach(function (p) { p.follow(); }); rollFit(); });
 
   // Replay starts both examples again. With reduced motion nothing plays, so the same button shows the next
   // step instead and says so, on screen and to a screen reader.
@@ -440,6 +463,8 @@
     reduce = !!mqReduce.matches;
     root.classList.toggle("gzh-still", reduce);
     nameReplay();
+    rollFocus();
+    rollFit();
     if (reduce) { paused = false; if (pause) pause.setAttribute("aria-pressed", "false"); still(STATES); live = false; root.classList.remove("gzh-live"); fx.still(); }
     else { if (count) count.textContent = ""; if (seen) play(); update(); }
   }
