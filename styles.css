@@ -65,10 +65,10 @@ svg.i { width: 16px; height: 16px; flex: none; fill: none; stroke: currentColor;
 @media (max-width: 760px) { .nav { gap: 12px; } .nav .nl { display: none; } }
 
 /* Sections sit inside the page frame: hairlines left and right on wide screens, a hairline between sections */
-.frame { position: relative; }
-@media (min-width: 1200px) { .frame { border-inline: 1px solid var(--line); } main > .frame { border-image: linear-gradient(to bottom, transparent, var(--line) 140px) 1; } }
+.frame { position: relative; --fp: var(--pad); }
+@media (min-width: 1200px) { .frame { --fp: calc(var(--pad) - 1px); padding-inline: var(--fp); border-inline: 1px solid var(--line); } main > .frame { border-image: linear-gradient(to bottom, transparent, var(--line) 140px) 1; } }
 section { padding: 88px 0; }
-.frame > section { margin-inline: calc(var(--pad) * -1); padding-inline: var(--pad); border-top: 1px solid var(--line); }
+.frame > section { margin-inline: calc(var(--fp) * -1); padding-inline: var(--fp); border-top: 1px solid var(--line); }
 main > .frame > section:first-child { border-top: 0; padding-top: 56px; }
 .head { max-width: 44rem; margin-bottom: 44px; }
 .kicker { margin: 0 0 16px; font: 400 var(--t-s)/1 var(--mono); color: var(--fg-2); }
