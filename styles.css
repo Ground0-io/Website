@@ -445,18 +445,23 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
 .gzh .gzh-proof .gzh-addr span:first-child { color: var(--gzh-fg-3); }
 @media (prefers-reduced-motion: no-preference) {
   .gzh.gzh-js .gzh-proof { align-self: stretch; }
-  /* entries appear and leave through a soft fade at both ends */
+  /* entries appear and leave through a soft fade at both ends (the strip is as wide as the text column: 100cqi) */
   .gzh.gzh-js .gzh-roll-view { overflow: hidden;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--gzh-roll-fade), #000 calc(100% - var(--gzh-roll-fade)), transparent);
     mask-image: linear-gradient(90deg, transparent, #000 var(--gzh-roll-fade), #000 calc(100% - var(--gzh-roll-fade)), transparent);
-    --gzh-roll-fade: clamp(24px, 7%, 56px); }
+    --gzh-roll-fade: clamp(24px, 7cqi, 56px); }
   /* The track is n rounds in one line and moves left by exactly one round, so the loop has no seam. A round is
      the companies and then the open slot; while there are fewer than three companies they come twice (or three
      times) before the slot, so that the slot never has the strip to itself for long. It starts one round in:
      there is always an entry to the left of the first one. One entry takes 8.5 seconds to go by, however many
      entries a round has (the page's script sets n and k). site.js sets --gzh-roll-fit on the first entry of each
-     round: the few pixels that make a round a whole number of pixels wide. */
+     round: the few pixels that make a round a whole number of pixels wide.
+     Where it starts: the first two companies stand whole between the two fades, as far to the right as they can,
+     so the page opens on both of them and they stay whole for the first seconds. --gzh-roll-pair is the width of
+     those two with the gap between them (the page's script and site.js measure it); --gzh-roll-lead is how far
+     the track is moved to the right for that, between 30px and 120px past the left fade. */
   .gzh.gzh-js .gzh-roll-track { flex-wrap: nowrap; gap: 0; width: max-content; will-change: transform;
+    --gzh-roll-lead: calc(var(--gzh-roll-fade) - var(--gzh-roll-gap) + clamp(30px, 100cqi - 2 * var(--gzh-roll-fade) - var(--gzh-roll-pair, 268px) - 5px, 120px));
     animation: gzh-roll calc(var(--gzh-roll-k) * 8.5s) linear infinite paused; }
   .gzh.gzh-js .gzh-roll-track > .gzh-lockup { display: flex; flex: none; margin-inline-start: calc(var(--gzh-roll-gap) + var(--gzh-roll-fit, 0px)); }
   /* It moves while the hero is live (on screen, tab visible, not paused with the hero's button) and the strip
@@ -465,7 +470,7 @@ footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(-
   .gzh.gzh-js.gzh-live .gzh-roll:focus-visible .gzh-roll-track { animation-play-state: paused; }
   @media (hover: hover) { .gzh.gzh-js.gzh-live .gzh-roll:hover .gzh-roll-track { animation-play-state: paused; } }
 }
-@keyframes gzh-roll { from { transform: translate3d(calc(-100% / var(--gzh-roll-n)), 0, 0); } to { transform: translate3d(calc(-200% / var(--gzh-roll-n)), 0, 0); } }
+@keyframes gzh-roll { from { transform: translate3d(calc(var(--gzh-roll-lead) - 100% / var(--gzh-roll-n)), 0, 0); } to { transform: translate3d(calc(var(--gzh-roll-lead) - 200% / var(--gzh-roll-n)), 0, 0); } }
 
 /* ── stage: the product windows ──────────────────────────────────────────── */
 .gzh .gzh-stage { min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr); row-gap: 16px; }

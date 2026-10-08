@@ -419,7 +419,7 @@
 
   // The roll of assistants under the buttons is moved by CSS alone while the hero is live. Three things are left
   // for here: it rests while the strip itself is off screen (on a phone the hero is taller than the screen); while
-  // it moves it can take keyboard focus, which holds it; and each copy of the list is made a whole number of
+  // it moves it can take keyboard focus, which holds it; and each round of the strip is made a whole number of
   // pixels wide (up to 4px more before its first entry), so the end of the loop is exactly its start.
   var roll = one(".gzh-roll"), rollTrack = roll && one(".gzh-roll-track", roll);
   if (roll && window.IntersectionObserver) {
@@ -435,6 +435,8 @@
     var w = kids[k].getBoundingClientRect().left - kids[0].getBoundingClientRect().left;
     var fit = Math.ceil((w - 0.01) / 4) * 4 - w;
     if (fit > 0.001) for (i = 0; i < kids.length; i += k) kids[i].style.setProperty("--gzh-roll-fit", fit + "px");
+    // the first two entries with the gap between them: the stylesheet starts the loop with these two whole
+    rollTrack.style.setProperty("--gzh-roll-pair", Math.ceil(kids[1].getBoundingClientRect().right - kids[0].getBoundingClientRect().left) + "px");
   }
   rollFocus();
   rollFit();
