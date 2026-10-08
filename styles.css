@@ -200,8 +200,9 @@ h3 { font-size: var(--t-l); line-height: 1.3; letter-spacing: -0.025em; }
 .closing .sub { margin-top: 14px; }
 .reach { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 32px; }
 .mail { display: inline-flex; align-items: center; min-height: 48px; padding: 0 6px 0 16px; gap: 8px; border: 1px solid var(--rule); border-radius: 8px; background: var(--bg); font: 400 var(--t-m)/1 var(--mono); }
-.mail span { user-select: all; -webkit-user-select: all; padding-right: 10px; }
-.copy { appearance: none; -webkit-appearance: none; display: none; align-items: center; gap: 6px; height: 36px; padding: 0 10px; border: 0; border-radius: 6px; background: var(--raise); color: var(--fg); font: 500 var(--t-s)/1 var(--sans); cursor: pointer; }
+.mail > span { user-select: all; -webkit-user-select: all; padding-right: 10px; }
+@media (max-width: 359px) { .mail { padding-left: 12px; font-size: 14px; } .mail > span { padding-right: 6px; } }
+.copy { appearance: none; -webkit-appearance: none; display: none; align-items: center; gap: 6px; height: 36px; padding: 0 10px; border: 0; border-radius: 6px; background: var(--raise); color: var(--fg); font: 500 var(--t-s)/1 var(--sans); cursor: pointer; user-select: none; -webkit-user-select: none; }
 .js .copy { display: inline-flex; }
 .copy .sw > :first-child { opacity: 1; visibility: visible; }
 .copy .sw > :last-child, .copy.ok .sw > :first-child { opacity: 0; visibility: hidden; }
