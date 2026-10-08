@@ -139,7 +139,8 @@ h3 { font-size: var(--t-l); line-height: 1.3; letter-spacing: -0.025em; }
 .card-text small { display: block; margin-bottom: 10px; font: 400 var(--t-xs)/1.3 var(--mono); color: var(--fg-3); }
 .card-text p { margin: 8px 0 0; color: var(--fg-2); text-wrap: pretty; }
 @media (max-width: 980px) { .card, .card.wide { grid-column: span 3; } .card:last-child { grid-column: span 6; } }
-@media (max-width: 640px) { .card, .card.wide, .card:last-child { grid-column: span 6; } .shot { min-height: 0; } }
+@media (max-width: 720px) { .card, .card.wide, .card:last-child { grid-column: span 6; } .shot { min-height: 0; } }
+@media (max-width: 380px) { .shot { padding-inline: 12px; } }
 /* a finger gets a full-size Replay, and the example keeps its distance from it */
 @media (pointer: coarse) { .replay { height: 44px; padding: 0 14px; } .stage, .shot { padding-bottom: 68px; } }
 .pane { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; width: 100%; max-width: 420px; margin-inline: auto; padding: 14px; border: 1px solid var(--rule); border-radius: 12px; background: var(--panel); }
@@ -150,7 +151,7 @@ h3 { font-size: var(--t-l); line-height: 1.3; letter-spacing: -0.025em; }
 .work .state { margin-top: 1px; }
 .file { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1px solid var(--rule); border-radius: 10px; background: var(--bg); min-width: 0; }
 .file .i { width: 18px; height: 18px; color: var(--fg-2); }
-.file b { font-weight: 500; overflow-wrap: anywhere; }
+.file b { min-width: 0; font-weight: 500; overflow-wrap: break-word; }
 .file span { margin-left: auto; padding-left: 8px; font-size: var(--t-s); color: var(--fg-3); white-space: nowrap; }
 .file .state { margin-left: auto; }
 /* a draft is dashed, a saved thing is solid */
@@ -166,6 +167,7 @@ h3 { font-size: var(--t-l); line-height: 1.3; letter-spacing: -0.025em; }
 .draft-ft > :first-child { opacity: 0; visibility: hidden; }
 .draft-ft > :last-child { justify-content: flex-start; font-size: var(--t-s); color: var(--fg-2); }
 .draft-ft > :last-child b { font-weight: 500; color: var(--fg); }
+.draft-ft > :last-child > span { text-wrap: balance; }
 .key { display: inline-flex; align-items: center; height: 34px; padding: 0 13px; border: 1px solid var(--rule); border-radius: 8px; font: 500 var(--t-s)/1 var(--sans); transition: transform 0.14s ease, box-shadow 0.14s ease, opacity 0.3s ease; }
 .key.go { border-color: var(--fg); background: var(--fg); color: var(--bg); }
 .thumbs { display: flex; gap: 8px; }
@@ -213,9 +215,11 @@ h3 { font-size: var(--t-l); line-height: 1.3; letter-spacing: -0.025em; }
 /* Footer */
 footer { border-top: 1px solid var(--line); color: var(--fg-2); font-size: var(--t-s); }
 .foot { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px 32px; padding-block: 40px; }
-.foot .brand { display: block; margin-bottom: 10px; font-size: var(--t-m); }
+.foot .brand { display: block; width: fit-content; margin-bottom: 10px; font-size: var(--t-m); }
 .foot .brand i { animation: none; }
-.foot nav { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 0 20px; margin-block: -6px; }
+.foot nav a { display: inline-flex; align-items: center; min-height: 32px; }
+@media (pointer: coarse) { .foot nav { margin-block: -12px; } .foot nav a { min-height: 44px; } }
 .foot a { text-decoration: none; transition: color 0.15s ease; }
 .foot a:hover { color: var(--fg); }
 .foot div a:not(.brand) { text-decoration: underline; text-decoration-color: rgb(255 255 255 / 0.3); }
